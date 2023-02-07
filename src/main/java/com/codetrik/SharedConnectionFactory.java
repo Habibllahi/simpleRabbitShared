@@ -49,4 +49,23 @@ public class SharedConnectionFactory {
         }
 
     }
+
+    public static Optional<Channel> createChannel(Connection connection)  {
+        try{
+            return connection.openChannel();
+        }catch (IOException e){
+            logger.error(e.getMessage(),e);
+            return Optional.empty();
+        }
+    }
+
+    public static void closeChannel(Channel channel){
+        if(channel.isOpen()){
+            try {
+                channel.close();
+            } catch (IOException | TimeoutException e) {
+                logger.error(e.getMessage(),e);
+            }
+        }
+    }
 }

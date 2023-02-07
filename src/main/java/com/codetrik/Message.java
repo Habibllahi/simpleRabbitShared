@@ -5,5 +5,5 @@ import com.rabbitmq.client.Channel;
 
 public interface Message<T extends AMPQMessage> {
     void publishMessage(Channel channel, T message) throws Exception;
-    T consumeMessage(Channel channel) throws Exception;
+    void consumeMessage(Channel channel) throws Exception;
 }
